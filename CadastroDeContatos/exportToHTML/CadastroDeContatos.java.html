@@ -1,0 +1,119 @@
+<html>
+<head>
+<title>CadastroDeContatos.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+CadastroDeContatos.java</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">javax</span><span class="s2">.</span><span class="s1">swing</span><span class="s2">.*;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">awt</span><span class="s2">.*;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">awt</span><span class="s2">.</span><span class="s1">event</span><span class="s2">.</span><span class="s1">ActionEvent</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">awt</span><span class="s2">.</span><span class="s1">event</span><span class="s2">.</span><span class="s1">ActionListener</span><span class="s2">;</span>
+
+<span class="s0">public class </span><span class="s1">CadastroDeContatos </span><span class="s0">extends </span><span class="s1">JFrame </span><span class="s2">{</span>
+    <span class="s0">private </span><span class="s1">JTextField txtNome</span><span class="s2">, </span><span class="s1">txtTelefone</span><span class="s2">, </span><span class="s1">txtEmail</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">DefaultListModel</span><span class="s2">&lt;</span><span class="s1">String</span><span class="s2">&gt; </span><span class="s1">listaContatosModel</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">JList</span><span class="s2">&lt;</span><span class="s1">String</span><span class="s2">&gt; </span><span class="s1">listaContatos</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">JButton btnAdicionar</span><span class="s2">, </span><span class="s1">btnRemover</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">JPanel panelMain</span><span class="s2">;</span>
+
+    <span class="s0">public </span><span class="s1">CadastroDeContatos</span><span class="s2">() {</span>
+        <span class="s1">setTitle</span><span class="s2">(</span><span class="s3">&quot;Cadastro de Contatos&quot;</span><span class="s2">);</span>
+        <span class="s1">setSize</span><span class="s2">(</span><span class="s4">600</span><span class="s2">, </span><span class="s4">600</span><span class="s2">);</span>
+        <span class="s1">setDefaultCloseOperation</span><span class="s2">(</span><span class="s1">JFrame</span><span class="s2">.</span><span class="s1">EXIT_ON_CLOSE</span><span class="s2">);</span>
+        <span class="s1">setLocationRelativeTo</span><span class="s2">(</span><span class="s0">null</span><span class="s2">);</span>
+        <span class="s1">setLayout</span><span class="s2">(</span><span class="s0">new </span><span class="s1">BorderLayout</span><span class="s2">());</span>
+
+        <span class="s1">JPanel panelMain </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JPanel</span><span class="s2">();</span>
+        <span class="s1">panelMain</span><span class="s2">.</span><span class="s1">setLayout</span><span class="s2">(</span><span class="s0">new </span><span class="s1">GridLayout</span><span class="s2">(</span><span class="s4">4</span><span class="s2">, </span><span class="s4">2</span><span class="s2">, </span><span class="s4">10</span><span class="s2">, </span><span class="s4">10</span><span class="s2">));</span>
+
+        <span class="s1">panelMain</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s0">new </span><span class="s1">JLabel</span><span class="s2">(</span><span class="s3">&quot;Nome:&quot;</span><span class="s2">));</span>
+        <span class="s1">txtNome </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JTextField</span><span class="s2">();</span>
+        <span class="s1">panelMain</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">txtNome</span><span class="s2">);</span>
+
+        <span class="s1">panelMain</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s0">new </span><span class="s1">JLabel</span><span class="s2">(</span><span class="s3">&quot;Telefone:&quot;</span><span class="s2">));</span>
+        <span class="s1">txtTelefone </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JTextField</span><span class="s2">();</span>
+        <span class="s1">panelMain</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">txtTelefone</span><span class="s2">);</span>
+
+        <span class="s1">panelMain</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s0">new </span><span class="s1">JLabel</span><span class="s2">(</span><span class="s3">&quot;E-mail:&quot;</span><span class="s2">));</span>
+        <span class="s1">txtEmail </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JTextField</span><span class="s2">();</span>
+        <span class="s1">panelMain</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">txtEmail</span><span class="s2">);</span>
+
+        <span class="s1">btnAdicionar </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JButton</span><span class="s2">(</span><span class="s3">&quot;Adicionar Contato&quot;</span><span class="s2">);</span>
+        <span class="s1">panelMain</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">btnAdicionar</span><span class="s2">);</span>
+
+        <span class="s1">add</span><span class="s2">(</span><span class="s1">panelMain</span><span class="s2">, </span><span class="s1">BorderLayout</span><span class="s2">.</span><span class="s1">NORTH</span><span class="s2">);</span>
+
+        <span class="s1">listaContatosModel </span><span class="s2">= </span><span class="s0">new </span><span class="s1">DefaultListModel</span><span class="s2">&lt;&gt;();</span>
+        <span class="s1">listaContatos </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JList</span><span class="s2">&lt;&gt;(</span><span class="s1">listaContatosModel</span><span class="s2">);</span>
+        <span class="s1">JScrollPane scrollPane </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JScrollPane</span><span class="s2">(</span><span class="s1">listaContatos</span><span class="s2">);</span>
+        <span class="s1">add</span><span class="s2">(</span><span class="s1">scrollPane</span><span class="s2">, </span><span class="s1">BorderLayout</span><span class="s2">.</span><span class="s1">CENTER</span><span class="s2">);</span>
+
+        <span class="s1">btnRemover </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JButton</span><span class="s2">(</span><span class="s3">&quot;Remover Contato&quot;</span><span class="s2">);</span>
+        <span class="s1">JPanel painelInferior </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JPanel</span><span class="s2">();</span>
+        <span class="s1">painelInferior</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">btnRemover</span><span class="s2">);</span>
+        <span class="s1">add</span><span class="s2">(</span><span class="s1">painelInferior</span><span class="s2">, </span><span class="s1">BorderLayout</span><span class="s2">.</span><span class="s1">SOUTH</span><span class="s2">);</span>
+
+        <span class="s1">btnAdicionar</span><span class="s2">.</span><span class="s1">addActionListener</span><span class="s2">(</span><span class="s0">new </span><span class="s1">ActionListener</span><span class="s2">() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">actionPerformed</span><span class="s2">(</span><span class="s1">ActionEvent e</span><span class="s2">) {</span>
+                <span class="s1">String nome </span><span class="s2">= </span><span class="s1">txtNome</span><span class="s2">.</span><span class="s1">getText</span><span class="s2">().</span><span class="s1">trim</span><span class="s2">();</span>
+                <span class="s1">String telefone </span><span class="s2">= </span><span class="s1">txtTelefone</span><span class="s2">.</span><span class="s1">getText</span><span class="s2">().</span><span class="s1">trim</span><span class="s2">();</span>
+                <span class="s1">String email </span><span class="s2">= </span><span class="s1">txtEmail</span><span class="s2">.</span><span class="s1">getText</span><span class="s2">().</span><span class="s1">trim</span><span class="s2">();</span>
+
+                <span class="s0">if </span><span class="s2">(</span><span class="s1">nome</span><span class="s2">.</span><span class="s1">isEmpty</span><span class="s2">() || </span><span class="s1">telefone</span><span class="s2">.</span><span class="s1">isEmpty</span><span class="s2">() || </span><span class="s1">email</span><span class="s2">.</span><span class="s1">isEmpty</span><span class="s2">()) {</span>
+                    <span class="s1">JOptionPane</span><span class="s2">.</span><span class="s1">showMessageDialog</span><span class="s2">(</span>
+                            <span class="s1">CadastroDeContatos</span><span class="s2">.</span><span class="s0">this</span><span class="s2">,</span>
+                            <span class="s3">&quot;Preencha todos os campos!&quot;</span><span class="s2">,</span>
+                            <span class="s3">&quot;Erro&quot;</span><span class="s2">,</span>
+                            <span class="s1">JOptionPane</span><span class="s2">.</span><span class="s1">ERROR_MESSAGE</span>
+                    <span class="s2">);</span>
+                    <span class="s0">return</span><span class="s2">;</span>
+                <span class="s2">}</span>
+
+                <span class="s1">String contato </span><span class="s2">= </span><span class="s1">String</span><span class="s2">.</span><span class="s1">format</span><span class="s2">(</span><span class="s3">&quot;Nome: %s | Telefone: %s | E-mail: %s&quot;</span><span class="s2">, </span><span class="s1">nome</span><span class="s2">, </span><span class="s1">telefone</span><span class="s2">, </span><span class="s1">email</span><span class="s2">);</span>
+                <span class="s1">listaContatosModel</span><span class="s2">.</span><span class="s1">addElement</span><span class="s2">(</span><span class="s1">contato</span><span class="s2">);</span>
+                <span class="s1">txtNome</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s3">&quot;&quot;</span><span class="s2">);</span>
+                <span class="s1">txtTelefone</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s3">&quot;&quot;</span><span class="s2">);</span>
+                <span class="s1">txtEmail</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s3">&quot;&quot;</span><span class="s2">);</span>
+            <span class="s2">}</span>
+        <span class="s2">});</span>
+
+        <span class="s1">btnRemover</span><span class="s2">.</span><span class="s1">addActionListener</span><span class="s2">(</span><span class="s0">new </span><span class="s1">ActionListener</span><span class="s2">() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">actionPerformed</span><span class="s2">(</span><span class="s1">ActionEvent e</span><span class="s2">) {</span>
+                <span class="s0">int </span><span class="s1">selectedIndex </span><span class="s2">= </span><span class="s1">listaContatos</span><span class="s2">.</span><span class="s1">getSelectedIndex</span><span class="s2">();</span>
+                <span class="s0">if </span><span class="s2">(</span><span class="s1">selectedIndex </span><span class="s2">!= -</span><span class="s4">1</span><span class="s2">) {</span>
+                    <span class="s1">listaContatosModel</span><span class="s2">.</span><span class="s1">remove</span><span class="s2">(</span><span class="s1">selectedIndex</span><span class="s2">);</span>
+                <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+                    <span class="s1">JOptionPane</span><span class="s2">.</span><span class="s1">showMessageDialog</span><span class="s2">(</span>
+                            <span class="s1">CadastroDeContatos</span><span class="s2">.</span><span class="s0">this</span><span class="s2">,</span>
+                            <span class="s3">&quot;Selecione um contato para remover!&quot;</span><span class="s2">,</span>
+                            <span class="s3">&quot;Erro&quot;</span><span class="s2">,</span>
+                            <span class="s1">JOptionPane</span><span class="s2">.</span><span class="s1">ERROR_MESSAGE</span>
+                    <span class="s2">);</span>
+                <span class="s2">}</span>
+            <span class="s2">}</span>
+        <span class="s2">});</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public static void </span><span class="s1">main</span><span class="s2">(</span><span class="s1">String</span><span class="s2">[] </span><span class="s1">args</span><span class="s2">) {</span>
+        <span class="s1">SwingUtilities</span><span class="s2">.</span><span class="s1">invokeLater</span><span class="s2">(() </span><span class="s1">-&gt; </span><span class="s2">{</span>
+            <span class="s1">CadastroDeContatos frame </span><span class="s2">= </span><span class="s0">new </span><span class="s1">CadastroDeContatos</span><span class="s2">();</span>
+            <span class="s1">frame</span><span class="s2">.</span><span class="s1">setVisible</span><span class="s2">(</span><span class="s0">true</span><span class="s2">);</span>
+        <span class="s2">});</span>
+    <span class="s2">}</span>
+<span class="s2">}</span></pre>
+</body>
+</html>
