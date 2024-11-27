@@ -1,0 +1,104 @@
+<html>
+<head>
+<title>AgendaDiaria.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+AgendaDiaria.java</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">javax</span><span class="s2">.</span><span class="s1">swing</span><span class="s2">.*;</span>
+<span class="s0">import </span><span class="s1">javax</span><span class="s2">.</span><span class="s1">swing</span><span class="s2">.</span><span class="s1">table</span><span class="s2">.</span><span class="s1">DefaultTableModel</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">awt</span><span class="s2">.*;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">awt</span><span class="s2">.</span><span class="s1">event</span><span class="s2">.</span><span class="s1">ActionEvent</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">awt</span><span class="s2">.</span><span class="s1">event</span><span class="s2">.</span><span class="s1">ActionListener</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">text</span><span class="s2">.</span><span class="s1">SimpleDateFormat</span><span class="s2">;</span>
+
+<span class="s0">public class </span><span class="s1">AgendaDiaria </span><span class="s0">extends </span><span class="s1">JFrame </span><span class="s2">{</span>
+    <span class="s0">private </span><span class="s1">JTextField txtCompromisso</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">JSpinner spnDataHora</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">JTable tabelaCompromissos</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">DefaultTableModel modeloTabela</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">JButton btnAdicionar</span><span class="s2">, </span><span class="s1">btnRemover</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">JPanel painelEntrada</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">JTextField textField1</span><span class="s2">;</span>
+
+    <span class="s0">public </span><span class="s1">AgendaDiaria</span><span class="s2">() {</span>
+        <span class="s1">setTitle</span><span class="s2">(</span><span class="s3">&quot;Agenda Diária&quot;</span><span class="s2">);</span>
+        <span class="s1">setSize</span><span class="s2">(</span><span class="s4">1000</span><span class="s2">, </span><span class="s4">800</span><span class="s2">);</span>
+        <span class="s1">setDefaultCloseOperation</span><span class="s2">(</span><span class="s1">JFrame</span><span class="s2">.</span><span class="s1">EXIT_ON_CLOSE</span><span class="s2">);</span>
+        <span class="s1">setLocationRelativeTo</span><span class="s2">(</span><span class="s0">null</span><span class="s2">);</span>
+
+        <span class="s1">setLayout</span><span class="s2">(</span><span class="s0">new </span><span class="s1">BorderLayout</span><span class="s2">());</span>
+
+        <span class="s1">JPanel painelEntrada </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JPanel</span><span class="s2">();</span>
+        <span class="s1">painelEntrada</span><span class="s2">.</span><span class="s1">setLayout</span><span class="s2">(</span><span class="s0">new </span><span class="s1">FlowLayout</span><span class="s2">());</span>
+
+        <span class="s1">txtCompromisso </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JTextField</span><span class="s2">(</span><span class="s4">20</span><span class="s2">);</span>
+        <span class="s1">painelEntrada</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s0">new </span><span class="s1">JLabel</span><span class="s2">(</span><span class="s3">&quot;Compromisso:&quot;</span><span class="s2">));</span>
+        <span class="s1">painelEntrada</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">txtCompromisso</span><span class="s2">);</span>
+
+        <span class="s1">spnDataHora </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JSpinner</span><span class="s2">(</span><span class="s0">new </span><span class="s1">SpinnerDateModel</span><span class="s2">());</span>
+        <span class="s1">JSpinner</span><span class="s2">.</span><span class="s1">DateEditor editor </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JSpinner</span><span class="s2">.</span><span class="s1">DateEditor</span><span class="s2">(</span><span class="s1">spnDataHora</span><span class="s2">, </span><span class="s3">&quot;dd/MM/yyyy HH:mm&quot;</span><span class="s2">);</span>
+        <span class="s1">spnDataHora</span><span class="s2">.</span><span class="s1">setEditor</span><span class="s2">(</span><span class="s1">editor</span><span class="s2">);</span>
+        <span class="s1">painelEntrada</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s0">new </span><span class="s1">JLabel</span><span class="s2">(</span><span class="s3">&quot;Data e Hora:&quot;</span><span class="s2">));</span>
+        <span class="s1">painelEntrada</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">spnDataHora</span><span class="s2">);</span>
+
+        <span class="s1">btnAdicionar </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JButton</span><span class="s2">(</span><span class="s3">&quot;Adicionar Compromisso&quot;</span><span class="s2">);</span>
+        <span class="s1">painelEntrada</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">btnAdicionar</span><span class="s2">);</span>
+
+        <span class="s1">add</span><span class="s2">(</span><span class="s1">painelEntrada</span><span class="s2">, </span><span class="s1">BorderLayout</span><span class="s2">.</span><span class="s1">NORTH</span><span class="s2">);</span>
+
+        <span class="s1">String</span><span class="s2">[] </span><span class="s1">colunas </span><span class="s2">= {</span><span class="s3">&quot;Data/Hora&quot;</span><span class="s2">, </span><span class="s3">&quot;Descrição&quot;</span><span class="s2">};</span>
+        <span class="s1">modeloTabela </span><span class="s2">= </span><span class="s0">new </span><span class="s1">DefaultTableModel</span><span class="s2">(</span><span class="s1">colunas</span><span class="s2">, </span><span class="s4">0</span><span class="s2">);</span>
+        <span class="s1">tabelaCompromissos </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JTable</span><span class="s2">(</span><span class="s1">modeloTabela</span><span class="s2">);</span>
+        <span class="s1">JScrollPane scrollPane </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JScrollPane</span><span class="s2">(</span><span class="s1">tabelaCompromissos</span><span class="s2">);</span>
+        <span class="s1">add</span><span class="s2">(</span><span class="s1">scrollPane</span><span class="s2">, </span><span class="s1">BorderLayout</span><span class="s2">.</span><span class="s1">CENTER</span><span class="s2">);</span>
+
+        <span class="s1">btnRemover </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JButton</span><span class="s2">(</span><span class="s3">&quot;Remover Compromisso&quot;</span><span class="s2">);</span>
+        <span class="s1">JPanel painelInferior </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JPanel</span><span class="s2">(</span><span class="s0">new </span><span class="s1">FlowLayout</span><span class="s2">());</span>
+        <span class="s1">painelInferior</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">btnRemover</span><span class="s2">);</span>
+        <span class="s1">add</span><span class="s2">(</span><span class="s1">painelInferior</span><span class="s2">, </span><span class="s1">BorderLayout</span><span class="s2">.</span><span class="s1">SOUTH</span><span class="s2">);</span>
+
+        <span class="s1">btnAdicionar</span><span class="s2">.</span><span class="s1">addActionListener</span><span class="s2">(</span><span class="s0">new </span><span class="s1">ActionListener</span><span class="s2">() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">actionPerformed</span><span class="s2">(</span><span class="s1">ActionEvent e</span><span class="s2">) {</span>
+                <span class="s1">String descricao </span><span class="s2">= </span><span class="s1">txtCompromisso</span><span class="s2">.</span><span class="s1">getText</span><span class="s2">().</span><span class="s1">trim</span><span class="s2">();</span>
+                <span class="s1">SimpleDateFormat sdf </span><span class="s2">= </span><span class="s0">new </span><span class="s1">SimpleDateFormat</span><span class="s2">(</span><span class="s3">&quot;dd/MM/yyyy HH:mm&quot;</span><span class="s2">);</span>
+                <span class="s1">String dataHora </span><span class="s2">= </span><span class="s1">sdf</span><span class="s2">.</span><span class="s1">format</span><span class="s2">(((</span><span class="s1">SpinnerDateModel</span><span class="s2">) </span><span class="s1">spnDataHora</span><span class="s2">.</span><span class="s1">getModel</span><span class="s2">()).</span><span class="s1">getDate</span><span class="s2">());</span>
+
+                <span class="s1">modeloTabela</span><span class="s2">.</span><span class="s1">addRow</span><span class="s2">(</span><span class="s0">new </span><span class="s1">Object</span><span class="s2">[]{</span><span class="s1">dataHora</span><span class="s2">, </span><span class="s1">descricao</span><span class="s2">});</span>
+                <span class="s1">txtCompromisso</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s3">&quot;&quot;</span><span class="s2">);</span>
+            <span class="s2">}</span>
+        <span class="s2">});</span>
+
+        <span class="s1">btnRemover</span><span class="s2">.</span><span class="s1">addActionListener</span><span class="s2">(</span><span class="s0">new </span><span class="s1">ActionListener</span><span class="s2">() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">actionPerformed</span><span class="s2">(</span><span class="s1">ActionEvent e</span><span class="s2">) {</span>
+                <span class="s0">int </span><span class="s1">selectedRow </span><span class="s2">= </span><span class="s1">tabelaCompromissos</span><span class="s2">.</span><span class="s1">getSelectedRow</span><span class="s2">();</span>
+                <span class="s0">if </span><span class="s2">(</span><span class="s1">selectedRow </span><span class="s2">!= -</span><span class="s4">1</span><span class="s2">) {</span>
+                    <span class="s1">modeloTabela</span><span class="s2">.</span><span class="s1">removeRow</span><span class="s2">(</span><span class="s1">selectedRow</span><span class="s2">);</span>
+
+                <span class="s2">}</span>
+            <span class="s2">}</span>
+        <span class="s2">});</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public static void </span><span class="s1">main</span><span class="s2">(</span><span class="s1">String</span><span class="s2">[] </span><span class="s1">args</span><span class="s2">) {</span>
+        <span class="s1">SwingUtilities</span><span class="s2">.</span><span class="s1">invokeLater</span><span class="s2">(() </span><span class="s1">-&gt; </span><span class="s2">{</span>
+            <span class="s1">AgendaDiaria agenda </span><span class="s2">= </span><span class="s0">new </span><span class="s1">AgendaDiaria</span><span class="s2">();</span>
+            <span class="s1">agenda</span><span class="s2">.</span><span class="s1">setVisible</span><span class="s2">(</span><span class="s0">true</span><span class="s2">);</span>
+        <span class="s2">});</span>
+    <span class="s2">}</span>
+<span class="s2">}</span></pre>
+</body>
+</html>
